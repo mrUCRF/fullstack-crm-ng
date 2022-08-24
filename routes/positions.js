@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router() // create local router
+const passport = require('passport')
 const controller = require('../controllers/positions')
 module.exports = router // export local route
 
