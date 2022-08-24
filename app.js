@@ -22,6 +22,7 @@ require('./middleware/passport')(passport)
 
 app.use(morgan('dev'))
 app.use(require('cors')())
+app.use('/uploads', express.static('uploads')) //доступ к картинкам напрямую
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 

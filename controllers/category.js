@@ -34,17 +34,35 @@ res.status(200).json({
     }
 }
 
-module.exports.createCategory = (req, res) => {
+module.exports.createCategory = async (req, res) => {
+    
     try {
-
+        const category = new Category({
+            name: req.body.name,
+            user: req.user.id,
+            imageSrc: req.file ? req.file.path : ''
+        })
+await category.save()
+res.status(201).json(category)
     } catch (err) {
         errorHandler(res, err)
     }
 }
 
-module.exports.updateCategory = (req, res) => {
+module.exports.updateCategory = async (req, res) => {
+    const updated = {
+        name: req.body.name,
+    }
+    if (req.file) {
+        updated.imageSrc = req.file.path
+    }
     try {
-
+const category = await Category.findOneAndUpdate(
+    {_id: req.params.id}, //обьект откуда беру категорию по айди
+    {$set: updated}, // добавляю новые данные в найденную категорию
+    {new: true} // сначала изменяю категорию а потом получаю ее в коде
+)
+res.status(200).json(category)
     } catch (err) {
         errorHandler(res, err)
     }
