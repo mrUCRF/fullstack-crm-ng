@@ -32,8 +32,8 @@ logout() {
   this.setToken(null)
   localStorage.clear()
 }
-register() {
-
+register(user: User): Observable<User> {
+return this.httpClient.post<User>('api/auth/register', user)
 }
   constructor(private httpClient: HttpClient) { }
 }
