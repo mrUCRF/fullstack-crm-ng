@@ -10,6 +10,7 @@ import { relativeTimeThreshold } from 'moment';
 })
 export class AuthService {
   private token: null | string = null
+
 login(user: User): Observable<{token: string}> {
 return this.httpClient.post<{token: string}>('/api/auth/login', user)
 .pipe( //принимает операторы и по цепочке их выполняет
