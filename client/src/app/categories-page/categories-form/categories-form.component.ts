@@ -42,9 +42,7 @@ export class CategoriesFormComponent implements OnInit {
   //  })
    this.route.params.pipe(
     switchMap( (params: Params) => {
-      console.log(`this.params: ${params['id']}`)
       if(params['id']) {
-        console.log('isNew = false')
         this.isNew = false
         return this.categoriesService.getById(params['id'])
       }
@@ -100,12 +98,10 @@ onFileUpload(event: any) {
       observable$ = this.categoriesService.create(this.form.value.name, this.image)
     } else {
       //call service method 'update'
-      console.log(`onSubmit->update / name:${this.form.value.name}, img: ${this.image}`)
       observable$ = this.categoriesService.update(this.category._id, this.form.value.name, this.image)
     }
     observable$.subscribe({
       next: (category) => {
-        console.log(category)
         this.category = category
         MaterialService.toast('Changes saved')
         this.form.enable()
