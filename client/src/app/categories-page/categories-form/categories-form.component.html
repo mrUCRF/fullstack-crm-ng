@@ -1,13 +1,12 @@
 <div class="page-title">
   <h4>
-    <a routerLink="/categories">Категории</a>
-    <br>
-    <br>
-    <i class="material-icons ">{{isNew ? 'Добавить' : 'Редактировать'}}</i>
+    <a routerLink="/categories">Категорії</a>
+    <i class="material-icons">keyboard_arrow_right</i>
+    {{ isNew ? 'Додати категорію' : 'Редагувати'}}
   </h4>
-  <span *ngIf="!isNew">
-    <button class="btn btn-small red" (click)="deleteCategory()" [disabled]="form.disabled">
-      <i class="material-icons">delete</i>
+  <span>
+    <button class="btn btn-small red">
+      <i class="material-icons" (click)="deleteCategory()">Видалити</i>
     </button>
   </span>
 </div>
@@ -17,33 +16,33 @@
     <div class="input-field">
       <input id="name" type="text" formControlName="name"
         [ngClass]="{'invalid': form.get('name')?.invalid && form.get('name')?.touched}">
-      <label for="name">Название</label>
+      <label for="name">Назва</label>
       <span class="helper-text red-text" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
         <span *ngIf="form.get('name')?.hasError('required')">
-          Имя не может быть пустым
+          Ім'я категорії не може бути пустим
         </span>
       </span>
     </div>
 
     <div>
-      <input type="file" (change)="onFileSelect($event)" class="dn" #input>
+      <input type="file" class="displayNone" #input (change)="onFileUpload($event)">
       <button class="waves-effect waves-light btn orange lighten-2 mb2" type="button" (click)="triggerClick()"
         [disabled]="form.disabled">
         <i class="material-icons left">backup</i>
-        Загрузить изображение
+        Завантажити зображення
       </button>
     </div>
 
     <div>
       <button class="waves-effect waves-light btn" type="submit" [disabled]="form.invalid || form.disabled">
-        Сохранить
+        Зберегти зміни
       </button>
     </div>
   </form>
 
   <div class="col s12 l4 center">
-    <img class="responsive-img h200" *ngIf="imagePreview" [src]="imagePreview">
+    <img class="responsive-img h200" [src]="imagePreview" *ngIf="imagePreview">
   </div>
 </div>
 
-<app-categories-form *ngIf="category?._id" [categoryId]="category._id"></app-categories-form>
+<!-- <app-positions-form></app-positions-form> -->

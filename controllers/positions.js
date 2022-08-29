@@ -27,13 +27,15 @@ module.exports.createPosition = async (req, res) => {
     }
 } 
 
-module.exports.editPosition = async (req, res) => {
+module.exports.deletePosition = async (req, res) => {
     try {
+        console.log('Позиция удалена')
 await Position.remove({_id: req.params.id})
 res.status(200).json({
     message: 'Position has been deleted'
 })
     } catch (e) {
+        console.log('Позиция не удалена')
         errorHandler(res, e)
     }
 }

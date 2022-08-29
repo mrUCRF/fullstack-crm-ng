@@ -6,5 +6,5 @@ module.exports = router // export local route
 
 router.get('/:categoryId', passport.authenticate('jwt', {session: false}), controller.getPositionByCategoryId )
 router.post('/', passport.authenticate('jwt', {session: false}), controller.createPosition )
-router.patch('/:id', passport.authenticate('jwt', {session: false}), controller.editPosition )
+router.patch('/:id', passport.authenticate('jwt', {session: false}), controller.deletePosition )
 router.delete('/:id', passport.authenticate('jwt', {session: false}), controller.updatePosition )

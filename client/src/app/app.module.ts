@@ -34,7 +34,7 @@ import { PositionsFormComponent } from './categories-page/categories-form/positi
     OrderPageComponent,
     OverviewPageComponent,
     CategoriesFormComponent,
-    PositionsFormComponent
+    PositionsFormComponent,
   ],
   imports: [
     BrowserModule,

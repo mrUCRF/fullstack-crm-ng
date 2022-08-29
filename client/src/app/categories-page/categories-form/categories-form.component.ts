@@ -1,3 +1,4 @@
+import { Message } from './../../shared/interfaces';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core'
 import {ActivatedRoute, Params, Router} from '@angular/router'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
@@ -13,13 +14,12 @@ import { of, switchMap } from 'rxjs'
 })
 export class CategoriesFormComponent implements OnInit {
 
-  @ViewChild('input') input!: ElementRef
+  @ViewChild('input') inputRef!: ElementRef //доступ к #input
+
   form!: FormGroup
   image!: File
   imagePreview: string | any = ''
-
   isNew = true
-
   category!: Category | any
 
   constructor(private route: ActivatedRoute,
@@ -31,80 +31,92 @@ export class CategoriesFormComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl(null, Validators.required)
     })
-
-    this.form.disable()
-
-    this.route.params
-      .pipe(switchMap((params: Params) => {
-        if (params['id']) {
-          this.isNew = false
-          return this.categoriesService.getById(params['id'])
-        }
-        return of(null)
-      }))
-      .subscribe({
-        next: (cat) => {
-          if (cat) {
-            this.category = cat
-            this.form.patchValue({
-              name: this.category.name
-            })
-            this.imagePreview = this.category.imageSrc as string
-            MaterialService.updateTextInput()
-          }
-          this.form.enable()
-        },
-        error: (err) => MaterialService.toast(err.error.message)
+  //  this.route.params.subscribe({
+  //   next: (params: Params) => {
+  //     if(params['id']) {
+  //       //редактируем форму
+  //       this.isNew = false
+  //     }
+  //     //добавление новой формы
+  //   }
+  //  })
+   this.route.params.pipe(
+    switchMap( (params: Params) => {
+      console.log(`this.params: ${params['id']}`)
+      if(params['id']) {
+        console.log('isNew = false')
+        this.isNew = false
+        return this.categoriesService.getById(params['id'])
+      }
+      return of(null)
+    })
+   ).subscribe({
+    next: category => {
+      if(category) {
+        this.category = category
+        this.form.patchValue({
+          name: category.name
+        })
+        this.imagePreview = category.imageSrc
+        MaterialService.updateTextInput()
+      }
+    },
+    error: err => MaterialService.toast(err.error.message)
   })
+   }
+triggerClick() {
+  this.inputRef.nativeElement.click()
+}
+deleteCategory() {
+  const decision = window.confirm(`Are you sure, you want to delete "${this.category.name}"`)
+  if(decision) {
+    this.categoriesService.delete(this.category._id).subscribe({
+      next: (res) => {
+        MaterialService.toast(res.message)
+      },
+      error: (err) => {
+        MaterialService.toast(err.error.message)
+      },
+      complete: () => this.router.navigate(['/categories'])
+    })
   }
+}
+onFileUpload(event: any) {
+  const file = event.target.files[0]
+  this.image = file
+
+  const reader = new FileReader()
+  reader.onload = () => {
+    this.imagePreview = reader.result
+  }
+  reader.readAsDataURL(file)
+}
 
   onSubmit() {
-    let obs$
+    let observable$
     this.form.disable()
-    if (this.isNew) {
-      obs$ = this.categoriesService.create(this.form.value.name, this.image)
+    if(this.isNew) {
+      //call service method 'create'
+      observable$ = this.categoriesService.create(this.form.value.name, this.image)
     } else {
-      obs$ = this.categoriesService.update(this.category._id, this.form.value.name, this.image)
+      //call service method 'update'
+      console.log(`onSubmit->update / name:${this.form.value.name}, img: ${this.image}`)
+      observable$ = this.categoriesService.update(this.category._id, this.form.value.name, this.image)
     }
-
-    obs$.subscribe(
-      category => {
+    observable$.subscribe({
+      next: (category) => {
+        console.log(category)
         this.category = category
-        MaterialService.toast('Изменения сохранены')
+        MaterialService.toast('Changes saved')
         this.form.enable()
       },
-      error => {
-        MaterialService.toast(error.error.message)
-        this.form.enable()
+      error: (err) => {
+        MaterialService.toast(err.error.message)
       }
+    }
+
     )
   }
 
-  deleteCategory() {
-    const decision = window.confirm('Вы уверены, что хотите удалить категорию?')
-    if (decision) {
-      this.categoriesService.delete(this.category._id).subscribe(
-        response => MaterialService.toast(response.message),
-        error => MaterialService.toast(error.error.message),
-        () => this.router.navigate(['/categories'])
-      )
-    }
-  }
 
-  onFileSelect(event: any ) {
-    const file = event.target.files[0]
-    this.image = file
-
-    const reader = new FileReader()
-
-    reader.onload = () => {
-      this.imagePreview = reader.result
-    }
-
-    reader.readAsDataURL(file)
-  }
-
-  triggerClick() {
-    this.input.nativeElement.click()
-  }
 }

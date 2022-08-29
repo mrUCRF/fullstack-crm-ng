@@ -3,11 +3,10 @@ import { Subscription } from 'rxjs'
 import { PositionsService } from 'src/app/shared/services/positions.service'
 import { IMaterialInstance, MaterialService } from 'src/app/shared/classes/material.service'
 import { Position } from 'src/app/shared/interfaces'
-import { response } from 'express'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
-  selector: 'app-categories-form',
+  selector: 'app-positions-form',
   templateUrl: './positions-form.component.html',
   styleUrls: ['./positions-form.component.sass']
 })

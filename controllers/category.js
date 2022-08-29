@@ -16,7 +16,9 @@ res.status(200).json(categoties)
 module.exports.getById = async (req, res) => {
     try {
         const category = await Category.findById(req.params.id)
-        res.status(200).json(category)
+        // setTimeout(() => {
+            res.status(200).json(category)
+        // },2000)
     } catch (err) {
         errorHandler(res, err)
     }
