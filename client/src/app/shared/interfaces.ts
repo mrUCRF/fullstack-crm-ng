@@ -60,3 +60,7 @@ export interface OverviewItem  {
   yesterday: number
   isHigher: boolean
 }
+
+export interface PositionId {
+  positionId: string
+}

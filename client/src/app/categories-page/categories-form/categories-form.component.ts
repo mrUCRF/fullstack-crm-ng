@@ -20,7 +20,7 @@ export class CategoriesFormComponent implements OnInit {
   image!: File
   imagePreview: string | any = ''
   isNew = true
-  category!: Category | any
+  category: Category | any
 
   constructor(private route: ActivatedRoute,
               private categoriesService: CategoriesService,

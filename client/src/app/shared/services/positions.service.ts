@@ -7,20 +7,20 @@ import {Observable} from 'rxjs'
 export class PositionsService {
   constructor(private http: HttpClient) {}
 
-  fetch(categoryId: string): Observable<Position[]> {
-    return this.http.get<Position[]>(`/api/position/${categoryId}`)
+  fetch(categoryId: string): Observable<Position[]> { //get all positions of category
+    return this.http.get<Position[]>(`/api/positions/${categoryId}`)
   }
 
   create(position: Position): Observable<Position> {
-    return this.http.post<Position>('/api/position', position)
+    return this.http.post<Position>('/api/positions', position)
   }
 
-  remove(id: string): Observable<Message> {
-    return this.http.delete<Message>(`/api/position/${id}`)
+  remove(id: string | undefined): Observable<Message> {
+    return this.http.delete<Message>(`/api/positions/${id}`)
   }
 
   update(position: Position): Observable<Position> {
-    return this.http.patch<Position>(`/api/position/${position._id}`, {
+    return this.http.patch<Position>(`/api/positions/${position._id}`, {
       name: position.name,
       cost: position.cost
     })
