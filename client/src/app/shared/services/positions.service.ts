@@ -15,8 +15,8 @@ export class PositionsService {
     return this.http.post<Position>('/api/positions', position)
   }
 
-  remove(id: string | undefined): Observable<Message> {
-    return this.http.delete<Message>(`/api/positions/${id}`)
+  delete(position: Position): Observable<Message> {
+    return this.http.delete<Message>(`/api/positions/${position._id}`)
   }
 
   update(position: Position): Observable<Position> {

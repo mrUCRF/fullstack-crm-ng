@@ -39,8 +39,20 @@ form!: FormGroup
   onCancel() {
     this.modal.close?.()
   }
-  onDeletePosition(position: Position) {
+  onDeletePosition(event: Event, position: Position) {
+    event.stopPropagation()
+    const answer = window.confirm(`Are you sure you want to delete "${position.name}" position?`)
+    if(answer) {
+      this.positionsService.delete(position).subscribe({
+        next: (response) => {
+          const indexDeletedPosition = this.positions.findIndex(p => p._id === position._id)
+          this.positions.splice(indexDeletedPosition, 1)
+          MaterialService.toast(response.message)
+        },
+        error: (err) => err.error.message
 
+      })
+    }
   }
 
   onSubmit() {
