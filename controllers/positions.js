@@ -14,10 +14,11 @@ res.status(200).json(positions)
 }
 
 module.exports.createPosition = async (req, res) => {
+    console.log('reqCreate:', req.body)
     try {
         const position = await new Position({
             name: req.body.name,
-            cost: req.body.cost,
+            cost: +req.body.cost,
             category: req.body.category,
             user: req.user.id
         }).save()

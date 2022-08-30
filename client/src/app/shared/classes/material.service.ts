@@ -3,9 +3,9 @@ import {ElementRef} from '@angular/core'
 declare let M: any
 
 export interface IMaterialInstance {
-  open?(): any
-  destroy?(): any
-  close?(): any
+  open?():  void
+  destroy?(): void
+  close?(): void
 }
 
 export interface IMaterialDatepicker extends IMaterialInstance {
@@ -31,7 +31,8 @@ export class MaterialService {
     M.updateTextFields()
   }
 
-  static initModal(ref: ElementRef): IMaterialInstance {
+  static initModal(ref: ElementRef): IMaterialInstance { //have 3 method: open, delete, close
+    // console.log('material service:', ref.nativeElement)
     return M.Modal.init(ref.nativeElement)
   }
 

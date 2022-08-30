@@ -1,3 +1,4 @@
+import { MaterialService } from 'src/app/shared/classes/material.service';
 import { CategoriesService } from './shared/services/categories.service';
 import { AuthGuard } from './shared/classes/auth.guard';
 import { AuthService } from './shared/services/auth.service';
@@ -48,6 +49,7 @@ import { PositionsFormComponent } from './categories-page/categories-form/positi
     AuthGuard,
     CategoriesService,
     PositionsService,
+    MaterialService,
     // OrdersService,
     // AnalyticsService,
     {
