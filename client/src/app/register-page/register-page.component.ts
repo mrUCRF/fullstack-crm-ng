@@ -1,3 +1,4 @@
+import { MaterialService } from './../shared/classes/material.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from './../shared/services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -30,6 +31,7 @@ onSubmit() {
   this.form.disable()
 this.authService.register(this.form.value).subscribe({
   next: () => {
+    MaterialService.toast('Welcome')
     this.router.navigate(['/login'], {
       queryParams: {
         registered: true
@@ -37,7 +39,7 @@ this.authService.register(this.form.value).subscribe({
     })
   },
   error: err => {
-    console.log(`Error status ${err.status} - ${err.statusText}`) //    console.warn(err)
+    MaterialService.toast(err.error.message) //    console.warn(err)
     this.form.enable()
 
   }
