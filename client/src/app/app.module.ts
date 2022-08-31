@@ -26,6 +26,8 @@ import { AnalyticsService } from './shared/services/analytics.service';
 import { OrderCategoriesComponent } from './order-page/order-categories/order-categories.component';
 import { OrderProductionComponent } from './order-page/order-production/order-production.component';
 import { OrdersService } from './shared/services/orders.service';
+import { HistoryFilterComponent } from './history-page/history-filter/history-filter.component';
+import { HistoryListComponent } from './history-page/history-list/history-list.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { OrdersService } from './shared/services/orders.service';
     LoaderComponent,
     OrderCategoriesComponent,
     OrderProductionComponent,
+    HistoryFilterComponent,
+    HistoryListComponent,
   ],
   imports: [
     BrowserModule,

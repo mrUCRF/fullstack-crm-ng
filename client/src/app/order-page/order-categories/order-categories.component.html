@@ -1,4 +1,3 @@
-<h1>ордер категориез</h1>
 <div *ngIf="categories$ | async as categories; else loader">
   <div class="frow order-row" *ngIf="categories.length !== 0; else empty">
     <div *ngFor="let category of categories" class="card waves-effect pointer" [routerLink]="['/order', category._id]">

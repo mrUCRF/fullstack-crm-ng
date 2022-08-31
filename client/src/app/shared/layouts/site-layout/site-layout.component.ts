@@ -14,7 +14,7 @@ export class SiteLayoutComponent implements AfterViewInit {
   @ViewChild('actionBtn') actionBtnEl!: ElementRef
 
   links = [
-    {url: '/overview', name: 'Обзор'},
+    {url: '/overview', name: 'Статистика'},
     {url: '/analytics', name: 'Аналитика'},
     {url: '/history', name: 'История'},
     {url: '/order', name: 'Новый заказ'},

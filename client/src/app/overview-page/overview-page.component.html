@@ -1,1 +1,67 @@
-<p>overview-page works!</p>
+<div class="page-title">
+  <h4>
+    Статистика за вчора ({{date}})
+    <i class="material-icons black-text pointer" (click)="showInfo()">info_outline</i>
+  </h4>
+</div>
+
+<div class="row" *ngIf="data$ | async as data; else loader">
+  <div class="col s12 l6">
+    <div class="card light-blue lighten-2 white-text">
+      <div class="card-content">
+        <span class="card-title">Дохід:</span>
+        <h3>{{data.gain.yesterday}} грн</h3>
+        <h3 class="m0 mb1" [ngClass]="{
+            'green-text text-darken-2': data.gain.isHigher,
+            'red-text': !data.gain.isHigher
+          }">
+          <i class="material-icons">
+            {{data.gain.isHigher ? 'arrow_upward': 'arrow_downward'}}
+          </i>
+          {{data.gain.percent}}%
+        </h3>
+        <p>
+          Дохід вашого бізнесу
+          {{data.gain.percent}}% {{data.gain.isHigher ? 'більше' : 'меньше'}}
+          всередньому: {{data.gain.compare}} грн в день
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12 l6">
+    <div class="card orange lighten-2 white-text">
+      <div class="card-content">
+        <span class="card-title">Замовлення:</span>
+        <h3>{{data.orders.yesterday}} замовлень</h3>
+        <h3 class="m0 mb1" [ngClass]="{
+            'green-text text-darken-2': data.orders.isHigher,
+            'red-text': !data.orders.isHigher
+          }">
+          <i class="material-icons">
+            {{data.orders.isHigher ? 'arrow_upward': 'arrow_downward'}}
+          </i>
+          {{data.orders.percent}}%
+        </h3>
+        <p>
+          Кількіль замовлень вчора на
+          {{data.orders.percent}}% {{data.orders.isHigher ? 'більше' : 'меньше'}}
+          середніх показників: {{data.orders.compare}} замовлень в день
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+
+<div class="tap-target" #tapTarget data-target="overview-tap-target">
+  <div class="tap-target-content">
+    <h5>Навіщо потрібна ця сторінка?</h5>
+    <p>Сторінка Статистика покаже динаміку продаж за попередній день. Поривняння з середніми показниками попоможе вам
+      зрозуміти як справи у вашого Бізнесу!</p>
+  </div>
+</div>

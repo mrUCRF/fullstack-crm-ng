@@ -1,6 +1,7 @@
 import { AnalyticsService } from './../shared/services/analytics.service';
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core'
-import {Chart} from 'chart.js'
+import Chart, { ChartConfiguration } from 'chart.js/auto'
+
 
 @Component({
   selector: 'app-analytics-page',
@@ -20,12 +21,12 @@ export class AnalyticsPageComponent implements AfterViewInit {
 
   ngAfterViewInit() {
      const gainConfig: any = {
-      label: 'Выручка',
+      label: 'Виручка',
       color: 'rgb(255, 99, 132)'
     }
 
     const orderConfig: any = {
-      label: 'Заказы',
+      label: 'Виручка',
       color: 'rgb(54, 162, 235)'
     }
 
@@ -49,7 +50,7 @@ export class AnalyticsPageComponent implements AfterViewInit {
   }
 }
 
-function createConfig({labels, data, label, color, title}: any): any {
+function createConfig({labels, data, label, color, title}: any): ChartConfiguration<any> {
   return {
     type: 'line',
     data: {
