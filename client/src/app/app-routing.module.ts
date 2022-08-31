@@ -11,6 +11,8 @@ import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.co
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { OrderCategoriesComponent } from './order-page/order-categories/order-categories.component';
+import { OrderProductionComponent } from './order-page/order-production/order-production.component';
 
 const routes: Routes = [
   {path: '', component: AuthLayoutComponent, children: [
@@ -23,7 +25,10 @@ const routes: Routes = [
 {path: 'overview', component: OverviewPageComponent},
 {path: 'analytics', component: AnalyticsPageComponent},
 {path: 'history', component: HistoryPageComponent},
-{path: 'order', component: OrderPageComponent},
+{path: 'order', component: OrderPageComponent, children: [
+  {path: '', component: OrderCategoriesComponent},
+  {path: ':id', component: OrderProductionComponent}
+]},
 {path: 'categories', component: CategoriesPageComponent},
 {path: 'categories/new', component: CategoriesFormComponent},
 {path: 'categories/:id', component: CategoriesFormComponent}

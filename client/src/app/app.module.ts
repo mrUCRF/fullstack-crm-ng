@@ -25,6 +25,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { AnalyticsService } from './shared/services/analytics.service';
 import { OrderCategoriesComponent } from './order-page/order-categories/order-categories.component';
 import { OrderProductionComponent } from './order-page/order-production/order-production.component';
+import { OrdersService } from './shared/services/orders.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { OrderProductionComponent } from './order-page/order-production/order-pr
     CategoriesService,
     PositionsService,
     MaterialService,
-    // OrdersService,
+    OrdersService,
     AnalyticsService,
     {
       provide: HTTP_INTERCEPTORS,
