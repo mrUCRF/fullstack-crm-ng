@@ -21,6 +21,7 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { PositionsService } from './shared/services/positions.service';
 import { CategoriesFormComponent } from './categories-page/categories-form/categories-form.component';
 import { PositionsFormComponent } from './categories-page/categories-form/positions-form/positions-form.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PositionsFormComponent } from './categories-page/categories-form/positi
     OverviewPageComponent,
     CategoriesFormComponent,
     PositionsFormComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

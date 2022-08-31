@@ -3,7 +3,7 @@
   <button class="waves-effect waves-light btn grey darken-1" routerLink="/categories/new">Добавить категорию</button>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="categories$ | async as categories; else loader">
   <div class="col s12">
     <div class="collection" *ngIf="categories.length !== 0; else empty">
       <a *ngFor="let category of categories" [routerLink]="['/categories', category._id]" class="collection-item">
@@ -12,12 +12,12 @@
     </div>
     <ng-template #empty>
       <div class="center">
-        У вас нет ни одной категории
+        У вас немає жодної категорії
       </div>
     </ng-template>
   </div>
 </div>
 
-<ng-template>
-  <!-- <app-loader></app-loader> -->
+<ng-template #loader>
+  <app-loader></app-loader>
 </ng-template>
