@@ -32,7 +32,6 @@ create(name: string, image?: File): Observable<Category> {
 update(id: string, name: string, image?: File): Observable<Category> {
   // console.log(`id: ${id} /// img: ${image}`)
   const formData = new FormData
-  debugger
   if(image) {
     formData.append('image', image, image.name) //имя должно совадать с бекендом
   }

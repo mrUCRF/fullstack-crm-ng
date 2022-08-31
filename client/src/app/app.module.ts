@@ -22,6 +22,9 @@ import { PositionsService } from './shared/services/positions.service';
 import { CategoriesFormComponent } from './categories-page/categories-form/categories-form.component';
 import { PositionsFormComponent } from './categories-page/categories-form/positions-form/positions-form.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { AnalyticsService } from './shared/services/analytics.service';
+import { OrderCategoriesComponent } from './order-page/order-categories/order-categories.component';
+import { OrderProductionComponent } from './order-page/order-production/order-production.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,8 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     CategoriesFormComponent,
     PositionsFormComponent,
     LoaderComponent,
+    OrderCategoriesComponent,
+    OrderProductionComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     PositionsService,
     MaterialService,
     // OrdersService,
-    // AnalyticsService,
+    AnalyticsService,
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,
